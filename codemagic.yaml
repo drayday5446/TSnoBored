@@ -8,6 +8,59 @@ workflows:
     scripts:
       - name: Create Android project files
         script: flutter create --platforms=android --project-name snowbored .
+      - name: App name and icon
+        script: |
+          sed -i.bak 's/android:label="[^"]*"/android:label="SnowBored"/' android/app/src/main/AndroidManifest.xml
+          RES=android/app/src/main/res
+          mkdir -p $RES/drawable $RES/mipmap-anydpi-v26
+          cat > $RES/mipmap-anydpi-v26/ic_launcher.xml << 'XML'
+          <?xml version="1.0" encoding="utf-8"?>
+          <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+            <background android:drawable="@drawable/ic_bg"/>
+            <foreground android:drawable="@drawable/ic_fg"/>
+          </adaptive-icon>
+          XML
+          cat > $RES/drawable/ic_bg.xml << 'XML'
+          <?xml version="1.0" encoding="utf-8"?>
+          <vector xmlns:android="http://schemas.android.com/apk/res/android"
+              android:width="108dp" android:height="108dp"
+              android:viewportWidth="108" android:viewportHeight="108">
+            <path android:fillColor="#7FB0F2" android:pathData="M0,0 H108 V108 H0 Z"/>
+            <path android:fillColor="#B9D3F7" android:pathData="M0,84 L22,60 L40,78 L64,52 L90,80 L108,66 V108 H0 Z"/>
+            <path android:fillColor="#F4F8FF" android:pathData="M0,96 L28,80 L50,94 L76,76 L108,94 V108 H0 Z"/>
+          </vector>
+          XML
+          cat > $RES/drawable/ic_fg.xml << 'XML'
+          <?xml version="1.0" encoding="utf-8"?>
+          <vector xmlns:android="http://schemas.android.com/apk/res/android"
+              android:width="108dp" android:height="108dp"
+              android:viewportWidth="108" android:viewportHeight="108">
+            <group android:scaleX="0.8" android:scaleY="0.8" android:pivotX="54" android:pivotY="54" android:translateY="4">
+              <path android:fillColor="#2B2F3A" android:pathData="M32,36 h44 a5,5 0 0 1 5,5 v32 a5,5 0 0 1 -5,5 h-44 a5,5 0 0 1 -5,-5 v-32 a5,5 0 0 1 5,-5 z"/>
+              <path android:fillColor="#E4EEFF" android:pathData="M31,40 H77 V74 H31 Z"/>
+              <path android:strokeColor="#2C7BE5" android:strokeWidth="1.4" android:fillColor="#00000000" android:pathData="M31,47 L40,50 L50,46 L60,50 L69,46 L77,48"/>
+              <path android:strokeColor="#2C7BE5" android:strokeWidth="1.4" android:fillColor="#00000000" android:pathData="M31,70 L41,67 L51,71 L61,67 L71,70 L77,68"/>
+              <path android:fillColor="#2F7A47" android:pathData="M38,54 L34,61 L42,61 Z M38,58 L33,65 L43,65 Z"/>
+              <path android:fillColor="#6B4423" android:pathData="M37,65 h2 v3 h-2 z"/>
+              <path android:fillColor="#2F7A47" android:pathData="M70,52 L66,59 L74,59 Z M70,56 L65,63 L75,63 Z"/>
+              <path android:fillColor="#6B4423" android:pathData="M69,63 h2 v3 h-2 z"/>
+              <path android:fillColor="#402B2F3A" android:pathData="M36,64 a20,3 0 1 0 40,0 a20,3 0 1 0 -40,0 z"/>
+              <path android:strokeColor="#CCFFFFFF" android:strokeWidth="1.2" android:strokeLineCap="round" android:pathData="M18,46 L27,44 M88,52 L97,50 M20,58 L26,57"/>
+              <path android:fillColor="#FFFFFF" android:pathData="M22,26 a1.4,1.4 0 1 0 2.8,0 a1.4,1.4 0 1 0 -2.8,0 z M86,40 a1.2,1.2 0 1 0 2.4,0 a1.2,1.2 0 1 0 -2.4,0 z M82,24 a1.6,1.6 0 1 0 3.2,0 a1.6,1.6 0 1 0 -3.2,0 z M30,14 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0 z"/>
+              <path android:fillColor="#F4B820" android:pathData="M30,52 L79,40 L80,45 L31,57 Z"/>
+              <path android:fillColor="#B77A10" android:pathData="M31,56 L80,44.2 L80,45 L31,57 Z"/>
+              <path android:strokeColor="#2E3350" android:strokeWidth="4.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" android:pathData="M45,49 L47,42 L53,38 M64,44 L63,40 L56,37"/>
+              <path android:strokeColor="#2F6FD0" android:strokeWidth="7" android:strokeLineCap="round" android:pathData="M54,38 L56,27"/>
+              <path android:strokeColor="#2F6FD0" android:strokeWidth="3.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" android:pathData="M57,28 L66,24 L72,16"/>
+              <path android:fillColor="#F2C9A0" android:pathData="M70.5,15 a2,2 0 1 0 4,0 a2,2 0 1 0 -4,0 z"/>
+              <path android:fillColor="#E8601C" android:pathData="M51.5,20 a6,6 0 1 0 12,0 a6,6 0 1 0 -12,0 z"/>
+              <path android:fillColor="#F2C9A0" android:pathData="M55,21.5 a4,4 0 1 0 8,0 a4,4 0 1 0 -8,0 z"/>
+              <path android:fillColor="#222222" android:pathData="M59,19.8 h5 v2 h-5 z"/>
+              <path android:strokeColor="#2F6FD0" android:strokeWidth="3.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" android:pathData="M55,29 L49,38 L43,48"/>
+              <path android:fillColor="#F2C9A0" android:pathData="M40.5,48.5 a2,2 0 1 0 4,0 a2,2 0 1 0 -4,0 z"/>
+            </group>
+          </vector>
+          XML
       - name: Get packages
         script: flutter pub get
       - name: Build APK
